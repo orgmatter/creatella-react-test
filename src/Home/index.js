@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ProductCards from '../Components/productCards';
+import ProductActionHeaderAppBar from './Header/productActionHeaderAppbar';
 
 const uuid = require('uuid').v4 ;
 
@@ -13,7 +14,8 @@ function Home (props) {
     const [pageProducts, setPageProducts] = useState(products);
     const [isElemInView, setIsElemInView] = useState(false);
     const bottomLimitRef = useRef(null);
-    const cardFlexCoverRef = useRef(null)
+    const cardFlexCoverRef = useRef(null);
+    const actionHeaderAppbarRef = useRef(null);
 
     useEffect(() => {
         const productParams = {
@@ -69,30 +71,40 @@ function Home (props) {
 
     return (
         <div className="component-home-container">
-            <div className="product-cards-cover-flex">
-                <div className="product-cards-cover-item">
-                    {
-                        status && status === 'success' ?
-                        <>
-                            <div className="product-cards-flex" ref={cardFlexCoverRef}>
-                                { pageProducts && pageProducts.length > 0 ? 
-                                    pageProducts.map((pageProduct, index) => {
-                                        return (
-                                            <ProductCards key={uuid()} cardKey={uuid()} product={pageProduct}/>
-                                        )
-                                    }) : 'No result'
-                                }
-                            </div>
-                            <div className="bottom-limit-cover">
-                                <div className="bottom-limit-div" ref={bottomLimitRef}>
-                                    <h2 className="bottom-limit-text">End of products</h2>
+            <div className="component-home-cover-flex">
+                <div className="component-home-cover-item">
+                    <div className="home-header-cover">
+
+                    </div>
+                    <div className="home-content-cover">
+                        <ProductActionHeaderAppBar />
+                        {
+                            status && status === 'success' ?
+                            <>
+                                <div className="home-content-body-flex">
+                                    <div className="home-content-body-item">
+                                        <div className="product-cards-flex" ref={cardFlexCoverRef}>
+                                            { pageProducts && pageProducts.length > 0 ? 
+                                                pageProducts.map((pageProduct, index) => {
+                                                    return (
+                                                        <ProductCards key={uuid()} cardKey={uuid()} product={pageProduct}/>
+                                                    )
+                                                }) : 'No result'
+                                            }
+                                        </div>
+                                        <div className="bottom-limit-cover">
+                                            <div className="bottom-limit-div" ref={bottomLimitRef}>
+                                                <h2 className="bottom-limit-text">End of products</h2>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
-                            </div> 
-                        </> : 
-                        <div className="product-card-load-status-cover">
-                            <p className="product-card-load-status-text">...Loading!</p>
-                        </div>
-                    }  
+                            </> : 
+                            <div className="product-card-load-status-cover">
+                                <p className="product-card-load-status-text">...Loading</p>
+                            </div>
+                        }  
+                    </div>
                 </div>
             </div>
         </div>

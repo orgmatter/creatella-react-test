@@ -1,0 +1,7 @@
+/* For smartphones and mobile phones ----------- */
+@media only screen 
+and (min-width : 320px) 
+and (max-width : 767px) {
+
+    @import '../layout-views/mobile';
+}
