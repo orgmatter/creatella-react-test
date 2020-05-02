@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
 import { getProductAction } from '../Store/Actions/productsActions'; 
-import { sortProducts } from '../Store/Actions/SortProductsActions';
+import { sortProductAction } from '../Store/Actions/sortProductsActions';
 import Home from './';
 
 
 const mapStateToProps = (state) => {
     return {
         productState: state.productState,
+        sortProductState: state.sortProductState
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getProducts: (productParams) => dispatch(getProductAction(productParams)),
-        sortProducts: (value) => dispatch(sortProducts(value)),
+        sortProducts: (sortParams) => dispatch(sortProductAction(sortParams)),
     }
 }
 

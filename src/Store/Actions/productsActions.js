@@ -4,14 +4,20 @@ import { Endpoints as ENDPOINTS } from '../API/Endpoints';
 export const getProductAction = (productParams) => dispatch => {
 
     const { host, uri, queryParams } = ENDPOINTS;
-    const { pageNo } = productParams;
-    console.log(pageNo);
+    const { pageNo, btnClickObj } = productParams;
     
+    let url = `${host+uri}?${queryParams.paginate.page}=${pageNo}&${queryParams.paginate.limit.default}`
+    
+    if(btnClickObj != false) {
+        const sortType = btnClickObj.btnName;
+        url = `${host+uri}?${queryParams.paginate.page}=${pageNo}&${queryParams.paginate.limit.default}&${queryParams.sorting.sort}=${sortType}`;
+    }
+
     dispatch({
         type: FETCH_PRODUCTS_BEGIN,
         status: 'begin'
     })
-    fetch(`${host+uri}?${queryParams.paginate.page}=${pageNo}&${queryParams.paginate.limit.default}`, {
+    fetch(url, {
         method: 'GET',
     })
     .then(data => data.json())
@@ -23,6 +29,7 @@ export const getProductAction = (productParams) => dispatch => {
                 type: FETCH_PRODUCTS_SUCCESS,
                 payload: res,
                 status: 'success',
+                isSortable: btnClickObj != false ? true : false
             })
         }
     }).catch(e => {
@@ -36,4 +43,5 @@ export const getProductAction = (productParams) => dispatch => {
         type: FETCH_PRODUCTS_END,
         status: 'end',
     })
+    
 }

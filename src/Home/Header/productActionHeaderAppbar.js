@@ -4,6 +4,8 @@ import ProductActionHeaderToolbar from './productActionHeaderToolbar';
 
 export default function ProductActionHeaderAppBar (props) {
 
+    const { sortProductAction } = props;
+
     const actionHeaderAppbarRef = useRef(null);
 
     window.addEventListener('scroll', () => {
@@ -22,7 +24,7 @@ export default function ProductActionHeaderAppBar (props) {
     return (
         <div className="product-action-appbar-container">
             <AppBar position="static" className="product-action-appbar-cover" ref={actionHeaderAppbarRef}>
-                <ProductActionHeaderToolbar />
+                <ProductActionHeaderToolbar sortProductAction={sortProductAction} />
             </AppBar>
         </div>
     )

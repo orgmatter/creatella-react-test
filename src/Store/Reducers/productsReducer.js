@@ -9,12 +9,13 @@ function productsReducer (state = initialState, action) {
             status: action.status
         }
         case FETCH_PRODUCTS_SUCCESS:
-        return {
-            ...state,
-            // products: state.products.concat(action.payload),
-            products: action.payload,
-            status: action.status,
-        }
+            return {
+                ...state,
+                products: action.payload,
+                status: action.status,
+                isSortable: action.isSortable
+            }
+        
         case FETCH_PRODUCTS_ERROR:
         return {
             ...state,

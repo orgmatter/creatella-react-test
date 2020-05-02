@@ -1,9 +1,10 @@
 export const allProductsState = {
     products: [],
     status: '',
+    isSortable: ''
 }
 
 export const sortProductsState = {
-    sortProducts: [],
-    status: '',
+    btnClickStatus: [],
+    isSortable: false,
 }
