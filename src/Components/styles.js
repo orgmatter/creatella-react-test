@@ -1,7 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const styles = makeStyles(theme => ({
-    progress: {
-      margin: theme.spacing(2),
-    },
-}));
+
+export const productCardStyles = (styleParams) => {
+
+  const { size } = styleParams;
+  const useStyle = makeStyles({
+    fontFace: {
+        fontSize: `${((size/16))}rem`,
+    }
+  })
+
+  return useStyle;
+} 

@@ -17,18 +17,18 @@ function Home (props) {
 
                     </div>
                     <div className="home-content-cover">
-                        <ProductActionHeaderAppBar sortProductAction={sortProducts} />
+                        <ProductActionHeaderAppBar sortProductAction={sortProducts} isSortable={isSortable}/>
                         {
                             isSortable === 'price' ? 
-                            <SortableProducts  btnClickStatus={btnClickStatus}/> : null
+                            <SortableProducts  btnClickStatus={btnClickStatus} isSortable={isSortable} /> : null
                         }
                         {
                             isSortable === 'size' ? 
-                            <SortableProducts  btnClickStatus={btnClickStatus}/> : null
+                            <SortableProducts  btnClickStatus={btnClickStatus} isSortable={isSortable} /> : null
                         }
                         {
                             isSortable === 'id' ? 
-                            <SortableProducts  btnClickStatus={btnClickStatus}/> : null
+                            <SortableProducts  btnClickStatus={btnClickStatus} isSortable={isSortable} /> : null
                         }
                         {
                             isSortable === false ? 

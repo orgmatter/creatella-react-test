@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState, useRef, useCallback } from 'rea
 import { Endpoints as ENDPOINTS } from '../../Store/API/Endpoints';
 import ProductCards from '../../Components/productCards';
 import { defaultProductAction } from '../Actions/defaultProductAction';
+import { defaultProductReducer } from '../Reducers/defaultProductReducer';
+import { useScrollObserver } from '../customHooks/useScrollObsserver';
 
 const uuid = require('uuid').v4;
 
@@ -16,25 +18,7 @@ function DefaultProducts (props) {
         fetchStatus: true, 
     }
 
-    const defaultProductReducer = (state, action) => {
-
-        switch(action.type) {
-            case 'FETCH_PRODUCT_SUCCESS':
-                return {
-                    ...state,
-                    fetchStatus: false,
-                    defaultProductData: state.defaultProductData.concat(action.payload)
-                }
-            case 'FETCH_PRODUCT_FAILED':
-                return {
-                    ...state,
-                    fetchStatus: false,
-                }
-            default:
-                return state
-
-        }
-    }
+    
     const [defaultProductsState, productDispatch] = useReducer(defaultProductReducer, defaultProductStateProps);
     const { defaultProductData, fetchStatus } = defaultProductsState;
     
@@ -49,27 +33,25 @@ function DefaultProducts (props) {
             productDispatch
         }
 
+        // trigger action only if page has incremented from zero (0)
         if(page >  0) {
             defaultProductAction(productParams);   
         }
    
     }, [page]);
 
-    const bottomLimitObserver = useCallback(node => {
-        new IntersectionObserver(entries => {
-            entries.forEach(en => {
-                if(en.intersectionRatio > 0) {
-                    setPage(prevPage => {
-                        prevPage += 1;
-                        return prevPage;
-                    })
-                }
-            })
-        }).observe(node);   
-    }, [setPage])
+    const scrollParams = {
+        updatePage: {
+            setPage
+        },
+    }
+
+    // observe the element at the end of each collection of data on scroll
+    const bottomLimitObserver = useScrollObserver(scrollParams);
 
     useEffect(() => {
 
+        // if element at the of the page changes from null to current
         if(bottomLimitRef.current) {
             bottomLimitObserver(bottomLimitRef.current)
         }
@@ -85,7 +67,7 @@ function DefaultProducts (props) {
                             return (
                                 <ProductCards key={uuid()} cardKey={uuid()} product={productData}/>
                             )
-                        }) : 'No result'
+                        }) : null
                     }
                 </div>
                 {

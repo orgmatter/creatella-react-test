@@ -2,9 +2,6 @@ export const defaultProductAction = (productParams) => {
 
     const { url, productDispatch } = productParams;
 
-    // productDispatch({
-    //     type: 'FETCH_PRODUCT_BEGIN'
-    // })
     fetch(url, {
         method: 'GET',
     })

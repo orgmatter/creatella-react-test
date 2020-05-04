@@ -4,7 +4,7 @@ import ProductActionHeaderToolbar from './productActionHeaderToolbar';
 
 export default function ProductActionHeaderAppBar (props) {
 
-    const { sortProductAction } = props;
+    const { sortProductAction, isSortable } = props;
 
     const actionHeaderAppbarRef = useRef(null);
 
@@ -24,7 +24,7 @@ export default function ProductActionHeaderAppBar (props) {
     return (
         <div className="product-action-appbar-container">
             <AppBar position="static" className="product-action-appbar-cover" ref={actionHeaderAppbarRef}>
-                <ProductActionHeaderToolbar sortProductAction={sortProductAction} />
+                <ProductActionHeaderToolbar sortProductAction={sortProductAction} isSortable={isSortable} />
             </AppBar>
         </div>
     )
