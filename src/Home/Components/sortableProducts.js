@@ -75,6 +75,8 @@ function SortableProducts (props) {
                 <div className="product-cards-flex" ref={cardFlexCoverRef}>
                     { sortableProductData && sortableProductData.length > 0 ? 
                         sortableProductData.map((productData, index) => {
+                            const productDataLastItem = sortableProductData[sortableProductData.length - 1];
+                            const productDataLastIndex = sortableProductData.lastIndexOf(productDataLastItem);
 
                             // sponsored advert goes here
                             i++;
@@ -92,7 +94,7 @@ function SortableProducts (props) {
                                 }
                             }
                             return (
-                                <ProductCards key={uuid()} cardKey={uuid()} product={productData} isSortable={isSortable} />
+                                <ProductCards key={uuid()} cardKey={uuid()} product={productData} isSortable={isSortable} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
                             )
                         }) : null
                     }

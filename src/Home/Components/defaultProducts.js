@@ -35,9 +35,10 @@ function DefaultProducts (props) {
         }
 
         // trigger action only if page has incremented from zero (0)
-        if(page >  0) {
-            defaultProductAction(productParams);   
-        }
+        // if(page >  0) {
+        //     defaultProductAction(productParams);   
+        // }
+        defaultProductAction(productParams);
    
     }, [page]);
 
@@ -56,14 +57,17 @@ function DefaultProducts (props) {
         if(bottomLimitRef.current) {
             bottomLimitObserver(bottomLimitRef.current)
         }
+        
 
     }, [bottomLimitObserver, bottomLimitRef]);
+
 
     const viewedAds = [];
     var imgIdNo = Math.floor(Math.random()*1000);
     var i = 0;
     var advancePage = page;
     advancePage-= 1;
+
 
     return (
         <div className="home-content-body-flex">
@@ -72,11 +76,13 @@ function DefaultProducts (props) {
                     
                     { defaultProductData && defaultProductData.length > 0 ? 
                         defaultProductData.map((productData, index) => {
+                            const productDataLastItem = defaultProductData[defaultProductData.length - 1];
+                            const productDataLastIndex = defaultProductData.lastIndexOf(productDataLastItem);
 
                             // sponsored advert goes here
                             i++;
                             if((i/(advancePage)) === 20) {
-                                
+
                                 if((viewedAds.length > 0) && (viewedAds.includes(imgIdNo))) {
                                     return null
                                 }else {
@@ -89,7 +95,7 @@ function DefaultProducts (props) {
                                 }
                             }
                             return (
-                                <ProductCards key={uuid()} cardKey={uuid()} product={productData} />
+                                <ProductCards key={uuid()} cardKey={uuid()} product={productData} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
                             )
                         }) : null
                     }
