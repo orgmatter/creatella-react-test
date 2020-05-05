@@ -1,6 +1,9 @@
 export const Endpoints = {
     host: 'http://localhost:3000',
-    uri: '/products',
+    uri: {
+        page: '/products',
+        advert: '/ads',
+    },
     queryParams: {
         paginate: {
             page: '_page',
@@ -9,6 +12,9 @@ export const Endpoints = {
         },
         sorting: {
             sort: '_sort'
+        },
+        random: {
+            key: '?r'
         }
     }
 }
