@@ -8,7 +8,7 @@ export const Endpoints = {
         paginate: {
             page: '_page',
             limit: '_limit',
-            limitDefault: '_limit=15',
+            limitDefault: '_limit=20',
         },
         sorting: {
             sort: '_sort'

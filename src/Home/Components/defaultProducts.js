@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState, useRef, useCallback } from 'react';
 import { Endpoints as ENDPOINTS } from '../../Store/API/Endpoints';
 import ProductCards from '../../Components/productCards';
-import SponsorAdvertCard from '../../Components/sponsorAdvertCard';
 import { defaultProductAction } from '../Actions/defaultProductAction';
 import { defaultProductReducer } from '../Reducers/defaultProductReducer';
 import { useScrollObserver } from '../customHooks/useScrollObsserver';
@@ -34,11 +33,14 @@ function DefaultProducts (props) {
             productDispatch
         }
 
-        // trigger action only if page has incremented from zero (0)
-        // if(page >  0) {
-        //     defaultProductAction(productParams);   
+        // if(page === 0) {
+        //     setPage(1)
         // }
-        defaultProductAction(productParams);
+
+        // trigger action only if page has incremented from zero (0)
+        if(page >  0) {
+            defaultProductAction(productParams);   
+        }
    
     }, [page]);
 
@@ -62,13 +64,6 @@ function DefaultProducts (props) {
     }, [bottomLimitObserver, bottomLimitRef]);
 
 
-    const viewedAds = [];
-    var imgIdNo = Math.floor(Math.random()*1000);
-    var i = 0;
-    var advancePage = page;
-    advancePage-= 1;
-
-
     return (
         <div className="home-content-body-flex">
             <div className="home-content-body-item">
@@ -79,21 +74,6 @@ function DefaultProducts (props) {
                             const productDataLastItem = defaultProductData[defaultProductData.length - 1];
                             const productDataLastIndex = defaultProductData.lastIndexOf(productDataLastItem);
 
-                            // sponsored advert goes here
-                            i++;
-                            if((i/(advancePage)) === 20) {
-
-                                if((viewedAds.length > 0) && (viewedAds.includes(imgIdNo))) {
-                                    return null
-                                }else {
-                                    viewedAds.concat(imgIdNo)
-                                
-                                    return (
-                                        <SponsorAdvertCard key={uuid()} advertKey={uuid()} imgIdNo={imgIdNo} />
-                                    )
-
-                                }
-                            }
                             return (
                                 <ProductCards key={uuid()} cardKey={uuid()} product={productData} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
                             )
@@ -104,14 +84,15 @@ function DefaultProducts (props) {
                     fetchStatus && (
                         <div className="product-card-load-status-cover">
                             <p className="product-card-load-status-text">...Loading</p>
-                        </div>
+                        </div> 
                     )
+                    
                 }
-                <div className="bottom-limit-cover">
-                    <div className="bottom-limit-div" ref={bottomLimitRef}>
+                <div className="bottom-limit-cover" ref={bottomLimitRef}>
+                    <div className="bottom-limit-div">
                         <h2 className="bottom-limit-text">~ end of catalogue ~</h2>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     )

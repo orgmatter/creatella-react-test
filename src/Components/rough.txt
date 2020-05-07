@@ -1,0 +1,36 @@
+    const lastCardItemObserver = useCallback(node => {
+        const intObs = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if ((en.intersectionRatio > 0)) {
+                    
+                    // setPage(prevState => {
+                    //     if(page === prevState) {
+                    //         return prevState
+                    //     }else {
+                    //         prevState+= 1
+                    //         return prevState;
+                    //     }
+                    // })
+
+                    setPage(prevState => {
+                        prevState+= 1
+                        return prevState;
+                    })
+                    
+                    intObs.unobserve(node); // detach the observer when done
+                }
+            });
+        })
+        intObs.observe(node);
+    }, [setPage]);
+
+
+    useEffect(() => {
+        lastCardItemRef.current = document.getElementById(`product-cards-item-${productCardItemLastIndex}`);
+        console.log(lastCardItemRef.current)
+
+        if(lastCardItemRef.current) {
+            lastCardItemObserver(lastCardItemRef.current)
+        }
+
+    }, [lastCardItemObserver, lastCardItemRef]);
