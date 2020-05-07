@@ -437,6 +437,141 @@ and (max-width : 991px) {
                     }
                 }
             }
+
+            .document-container {
+                width: 100%;
+                color: rgba(0,0,0,0.7);
+
+                .document-cover-flex {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+
+                    .document-cover-item {
+                        width: 100%;
+                        background-color: #fff;
+                        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+                        padding: 30px;
+
+                        .document-header-cover {
+                            width: 100%;
+                            padding-bottom: 15px;
+
+                            .title-header-cover {
+                                width: 100%;
+                                text-align: center;
+
+                                .header-title {
+                                    font-size: 2rem;
+                                }
+                            }
+                            .subtitle-subheader-cover {
+                                width: 100%;
+                                text-align: center;
+
+                                .subheader-subtitle {
+                                    font-size: 1.2rem;
+                                    line-height: 25px;
+                                }
+                            }
+                        }
+                        .document-content-cover {
+                            width: 100%;
+
+                            .content-header-texts-cover {
+                                width: 100%;
+
+                                .content-title-header-cover {
+                                    width: 100%;
+
+                                    .header-title {
+
+                                    }
+                                }
+                                .content-subtitle-subheader-cover {
+                                    width: 100%;
+
+                                    .subheader-subtitle {
+                                        line-height: 25px;
+                                    }
+                                }
+                            }
+                            .feature-header-texts-cover {
+                                width: 100%;
+                                padding-top: 5px;
+
+                                .feature-title-header-cover {
+                                    width: 100%;
+
+                                    .header-title {
+
+                                    }
+                                }
+                                .feature-subtitle-subheader-cover {
+                                    width: 100%;
+
+                                    .subheader-subtitle {
+                                        font-size: 1.2rem;
+                                        font-weight: 600;
+                                    }
+                                    .feature-subheader-texts-cover {
+                                        width: 100%;
+                                        margin-left: 18px;
+
+                                        .subtitle-header-cover {
+                                            width: 100%;
+
+                                            .header-title {
+                                                font-size: 1.2rem;
+                                            }
+                                            .header-subtitle {
+                                                font-size: 1rem;
+                                                line-height: 25px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .content-footer-cover {
+                            width: 100%;
+
+                            .footer-header-cover {
+                                width: 100%;
+
+                                .footer-header-text {
+                                    font-size: 1.5rem;
+                                    font-weight: 600;
+                                }
+                                .footer-subheader-text {
+
+                                }
+                            }
+                            .footer-btn-cover-flex {
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+
+                                .footer-btn-cover-item {
+                                    width: 20%;
+                                    padding-top: 15px;
+
+                                    .footer-btn {
+                                        width: 100%;
+                                        padding: 7px;
+
+                                        .footer-btn-a {
+                                            color: #fff;
+                                            text-decoration: none;
+                                            font-size: 1rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

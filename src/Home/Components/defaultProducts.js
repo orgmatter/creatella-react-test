@@ -3,7 +3,7 @@ import { Endpoints as ENDPOINTS } from '../../Store/API/Endpoints';
 import ProductCards from '../../Components/productCards';
 import { defaultProductAction } from '../Actions/defaultProductAction';
 import { defaultProductReducer } from '../Reducers/defaultProductReducer';
-import { useScrollObserver } from '../customHooks/useScrollObsserver';
+import { useScrollObserver } from '../customHooks/useScrollObserver';
 
 const uuid = require('uuid').v4;
 

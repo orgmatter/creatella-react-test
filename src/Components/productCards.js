@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import { cardParamFormat } from './productCardFuncs';
 import { productCardStyles } from './styles';
 import SponsorAdvertCard from './sponsorAdvertCard';
@@ -8,11 +8,6 @@ const uuid = require('uuid').v4;
 function ProductCards (props) {
     
     const { product, cardKey, isSortable, page, setPage, cardItemParentRef, cardItemIndex, cardItemLastIndex} = props;
-    const lastCardItemRef = useRef(null);
-    var productCardItemLastIndex = cardItemLastIndex;
-    productCardItemLastIndex-=1;
-
-    console.log(cardItemLastIndex)
     
     // variables for adverts 
     const viewedAds = [];
@@ -20,8 +15,6 @@ function ProductCards (props) {
     var productPageNo = page;
     var productIndexNo = cardItemIndex;
     productIndexNo+= 1;
-
-    console.log('productPageNo', productPageNo);
 
     const cardParams = {
         price: {

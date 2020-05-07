@@ -1,17 +1,15 @@
 import React, { useEffect, useReducer, useState, useRef, useCallback } from 'react';
 import { Endpoints as ENDPOINTS } from '../../Store/API/Endpoints';
 import ProductCards from '../../Components/productCards';
-import SponsorAdvertCard from '../../Components/sponsorAdvertCard';
 import { sortableProductAction } from '../Actions/sortableProductAction';
 import { sortableProductReducer } from '../Reducers/sortableProductReducer';
-import { useScrollObserver } from '../customHooks/useScrollObsserver';
+import { useScrollObserver } from '../customHooks/useScrollObserver';
 
 const uuid = require('uuid').v4;
 
 function SortableProducts (props) {
 
     const { btnClickStatus, isSortable } = props;
-    console.log(btnClickStatus)
 
     const [page, setPage] = useState(0);
     const cardFlexCoverRef = useRef(null);
@@ -63,11 +61,6 @@ function SortableProducts (props) {
 
     }, [bottomLimitObserver, bottomLimitRef]);
 
-    const viewedAds = [];
-    var imgIdNo = Math.floor(Math.random()*1000);
-    var i = 0;
-    var advancePage = page;
-    advancePage-= 1;
 
     return (
         <div className="home-content-body-flex">
@@ -78,21 +71,6 @@ function SortableProducts (props) {
                             const productDataLastItem = sortableProductData[sortableProductData.length - 1];
                             const productDataLastIndex = sortableProductData.lastIndexOf(productDataLastItem);
 
-                            // sponsored advert goes here
-                            i++;
-                            if((i/(advancePage)) === 20) {
-
-                                if((viewedAds.length > 0) && (viewedAds.includes(imgIdNo))) {
-                                    return null
-                                }else {
-                                    viewedAds.concat(imgIdNo)
-                                
-                                    return (
-                                        <SponsorAdvertCard imgIdNo={imgIdNo} />
-                                    )
-
-                                }
-                            }
                             return (
                                 <ProductCards key={uuid()} cardKey={uuid()} product={productData} isSortable={isSortable} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
                             )
