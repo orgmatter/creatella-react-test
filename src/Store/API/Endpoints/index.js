@@ -1,5 +1,5 @@
 export const Endpoints = {
-    host: 'https://localhost:3000',
+    host: 'http://localhost:3000',
     uri: {
         page: '/products',
         advert: '/ads',
