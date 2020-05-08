@@ -14,13 +14,14 @@ function DefaultProducts (props) {
     const bottomLimitRef = useRef(null);
 
     const defaultProductStateProps = {
-        defaultProductData: [], 
+        defaultStackProductData: [], 
+        defaultProductData: [],
         fetchStatus: true, 
     }
 
     
     const [defaultProductsState, productDispatch] = useReducer(defaultProductReducer, defaultProductStateProps);
-    const { defaultProductData, fetchStatus } = defaultProductsState;
+    const { defaultStackProductData, defaultProductData, fetchStatus } = defaultProductsState;
     
     const { host, uri, queryParams } = ENDPOINTS;
     const { paginate } = queryParams;
@@ -69,10 +70,10 @@ function DefaultProducts (props) {
             <div className="home-content-body-item">
                 <div className="product-cards-flex" ref={cardFlexCoverRef}>
                     
-                    { defaultProductData && defaultProductData.length > 0 ? 
-                        defaultProductData.map((productData, index) => {
-                            const productDataLastItem = defaultProductData[defaultProductData.length - 1];
-                            const productDataLastIndex = defaultProductData.lastIndexOf(productDataLastItem);
+                    { defaultStackProductData && defaultStackProductData.length > 0 ? 
+                        defaultStackProductData.map((productData, index) => {
+                            const productDataLastItem = defaultStackProductData[defaultStackProductData.length - 1];
+                            const productDataLastIndex = defaultStackProductData.lastIndexOf(productDataLastItem);
 
                             return (
                                 <ProductCards key={uuid()} cardKey={uuid()} product={productData} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
@@ -90,7 +91,11 @@ function DefaultProducts (props) {
                 }
                 <div className="bottom-limit-cover" ref={bottomLimitRef}>
                     <div className="bottom-limit-div">
-                        <h2 className="bottom-limit-text">~ end of catalogue ~</h2>
+                        {
+                            defaultProductData.length <= 0 && (
+                                <h2 className="bottom-limit-text">~ end of catalogue ~</h2>
+                            )
+                        }
                     </div>
                 </div>
             </div>

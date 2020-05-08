@@ -10,7 +10,8 @@ export const defaultProductReducer = (state, action) => {
             return {
                 ...state,
                 fetchStatus: false,
-                defaultProductData: state.defaultProductData.concat(action.payload)
+                defaultStackProductData: state.defaultStackProductData.concat(action.payload),
+                defaultProductData: action.payload
             }
         case 'FETCH_PRODUCT_FAILED':
             return {

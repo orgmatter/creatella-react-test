@@ -16,12 +16,13 @@ function SortableProducts (props) {
     const bottomLimitRef = useRef(null);
 
     const sortableProductStateProps = {
-        sortableProductData: [], 
+        sortableStackProductData: [], 
+        sortableProductData: [],
         fetchStatus: true, 
     }
 
     const [sortableProductsState, productDispatch] = useReducer(sortableProductReducer, sortableProductStateProps);
-    const { sortableProductData, fetchStatus } = sortableProductsState;
+    const { sortableStackProductData, sortableProductData, fetchStatus } = sortableProductsState;
     
     const { host, uri, queryParams } = ENDPOINTS;
     const { paginate, sorting } = queryParams;
@@ -66,10 +67,10 @@ function SortableProducts (props) {
         <div className="home-content-body-flex">
             <div className="home-content-body-item">
                 <div className="product-cards-flex" ref={cardFlexCoverRef}>
-                    { sortableProductData && sortableProductData.length > 0 ? 
-                        sortableProductData.map((productData, index) => {
-                            const productDataLastItem = sortableProductData[sortableProductData.length - 1];
-                            const productDataLastIndex = sortableProductData.lastIndexOf(productDataLastItem);
+                    { sortableStackProductData && sortableStackProductData.length > 0 ? 
+                        sortableStackProductData.map((productData, index) => {
+                            const productDataLastItem = sortableStackProductData[sortableStackProductData.length - 1];
+                            const productDataLastIndex = sortableStackProductData.lastIndexOf(productDataLastItem);
 
                             return (
                                 <ProductCards key={uuid()} cardKey={uuid()} product={productData} isSortable={isSortable} page={page} setPage={setPage} cardItemParentRef={cardFlexCoverRef} cardItemIndex={index} cardItemLastIndex={productDataLastIndex} />
@@ -84,9 +85,13 @@ function SortableProducts (props) {
                         </div>
                     )
                 }
-                <div className="bottom-limit-cover">
-                    <div className="bottom-limit-div" ref={bottomLimitRef}>
-                        <h2 className="bottom-limit-text">~ end of catalogue ~</h2>
+                <div className="bottom-limit-cover" ref={bottomLimitRef}>
+                    <div className="bottom-limit-div">
+                        {
+                            sortableProductData.length <= 0 && (
+                                <h2 className="bottom-limit-text">~ end of catalogue ~</h2>
+                            )
+                        }
                     </div>
                 </div> 
             </div>

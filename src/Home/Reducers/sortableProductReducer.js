@@ -5,7 +5,8 @@ export const sortableProductReducer = (state, action) => {
             return {
                 ...state,
                 fetchStatus: false,
-                sortableProductData: state.sortableProductData.concat(action.payload)
+                sortableStackProductData: state.sortableStackProductData.concat(action.payload),
+                sortableProductData: action.payload
             }
         case 'FETCH_PRODUCT_FAILED':
             return {
