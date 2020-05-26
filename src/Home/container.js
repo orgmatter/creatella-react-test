@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getProductAction } from '../Store/Actions/productsActions'; 
 import { sortProductAction } from '../Store/Actions/sortProductsActions';
-import Home from './';
+import Home from '.';
 
 
 const mapStateToProps = (state) => {
